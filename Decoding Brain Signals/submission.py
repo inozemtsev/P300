@@ -13,9 +13,15 @@ if mode == 'create':
     # we need a workaround to transform weights matrices in suitable format
     
     for p in ['p1', 'p2', 'p3', 'p4']:
-        weights = list(np.load(p+'.npz')['data'])
-        with open(os.path.join(folder, p+'.pkl'), 'wb') as f:
-            pickle.dump(weights, f)
+        i=0
+        while True:
+            try:
+                weights = list(np.load(p+'_'+str(i)+'.npz')['data'])
+                with open(os.path.join(folder, p+'_'+str(i)+'.pkl'), 'wb') as f:
+                    pickle.dump(weights, f)
+                i+=1
+            except:
+                break
                   
     # -----
     
